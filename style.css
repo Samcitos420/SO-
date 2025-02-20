@@ -1,0 +1,776 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Zabezpečenie, že body bude mať minimálne výšku celej obrazovky */
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: black; /* Pôvodne biela pozadia, teraz čierna */
+    color: white; /* Pôvodne čierny text, teraz biely */
+    transition: background-color 0.5s, color 0.5s;
+    height: 100%; /* Nastavenie výšky na 100% pre HTML a body */
+}
+
+/* Pre header */
+header {
+    background-color: white; /* Pôvodne čierne, teraz biele */
+    color: black; /* Pôvodne biele, teraz čierne */
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    gap: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* Umiestni navigáciu do stredu */
+    gap: 20px; /* Medzera medzi ikonami */
+    padding: 0 50px; /* Pridaj padding na ľavej a pravej strane */
+}
+
+
+nav a {
+    color: black; /* Pôvodne biele, teraz čierne */
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Hero sekcia */
+.hero {
+    background: black; /* Pôvodne biele, teraz čierne */
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    color: white; /* Pôvodne čierne, teraz biele */
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Pôvodne biele, teraz čierne */
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 48px;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3); /* Biele tiene na čiernom pozadí */
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: white; /* Pôvodne čierne, teraz biele */
+    color: black; /* Pôvodne biele, teraz čierne */
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    z-index: 2;
+}
+
+/* Sekcia produktov */
+.products-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Zmenši min. šírku produktov */
+    gap: 20px;
+    margin-top: 40px;
+    margin-left: auto; /* Umiestni produkty na stred */
+    margin-right: auto; /* Umiestni produkty na stred */
+    margin-bottom: 40px;
+}
+
+.product-card {
+    background-color: white; /* Zmenené na biele */
+    color: black; /* Zmenené na čierne pre text */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Čierne tiene */
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex; /* Pridaj tento riadok */
+    flex-direction: column; /* Pridaj tento riadok */
+    justify-content: center; /* Pridaj tento riadok */
+    align-items: center; /* Pridaj tento riadok */
+    text-align: center; /* Pridaj tento riadok pre zarovnanie textu na stred */
+    margin: 0 auto;
+    min-width: 400px;
+}
+
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2); /* Čierne tiene */
+}
+
+/* Sociálne ikony */
+.social-icons a {
+    color: black; /* Pôvodne biele, teraz čierne */
+    margin: 0 10px;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+footer {
+    background-color: white; /* Pôvodne čierne, teraz biele */
+    color: black; /* Pôvodne biele, teraz čierne */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    background-color: black; /* Pôvodne biele, teraz čierne */
+}
+
+.cta-button-small {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.nav-icon {
+    width: 30px; /* Šírka ikony */
+    height: 30px; /* Výška ikony */
+    transition: transform 0.3s; /* Efekt pri hoveri */
+    padding: 8px; /* Pridaj padding pre lepšie klikateľné oblasti */
+    border-radius: 5px; /* Zaoblené okraje pre lepší vzhľad */
+    background-color: rgba(255, 255, 255, 0.8); /* Polopriehľadné pozadie pre lepšiu viditeľnosť */
+    cursor: pointer;
+}
+
+.container h2 {
+    text-align: center; /* Zarovná nadpis na stred */
+    margin-top: 20px; /* Pridaj margin pre lepšie umiestnenie */
+}
+
+.logo h1 {
+    font-size: 28px; /* Zmenši veľkosť nadpisu */
+    margin: 0 auto; /* Umiestni nadpis na stred */
+}
+
+.user-icon-container {
+    position: relative;
+}
+
+.login-form {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+/* Zobraziť formulár pri hoveri */
+.user-icon-container:hover .login-form {
+    display: block;
+}
+
+/* Štýly pre formulár */
+.login-form h3 {
+    margin-top: 0;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: darkgray;
+}
+
+/* Štýly pre modálne okno */
+.modal {
+    display: none; /* Skryť modálne okno predtým, než sa otvorí */
+    position: fixed; /* Pozícia na celej obrazovke */
+    z-index: 1000; /* Na vrchole všetkých ostatných elementov */
+    left: 0;
+    top: 0;
+    width: 100%; /* Celá šírka */
+    height: 100%; /* Celá výška */
+    overflow: auto; /* Povoliť rolovanie, ak je potrebné */
+    background-color: rgba(0, 0, 0, 0.7); /* Polopriehľadné pozadie */
+}
+
+/* Obsah modálneho okna */
+.modal-content {
+    background-color: white; /* Biele pozadie pre obsah modálneho okna */
+    margin: 15% auto; /* Umiestniť na stred obrazovky */
+    padding: 20px; /* Padding pre obsah */
+    border: 1px solid #888; /* Rámček */
+    width: 400px; /* Šírka modálneho okna */
+    border-radius: 10px; /* Zaoblené rohy */
+}
+
+/* Tlačidlo na zatvorenie modálneho okna */
+.close {
+    color: #aaa; /* Šedá farba pre tlačidlo */
+    float: right; /* Umiestniť napravo */
+    font-size: 28px; /* Veľkosť písma */
+    font-weight: bold; /* Tučné písmo */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Zmena farby pri hoveri */
+    text-decoration: none; /* Bez podčiarknutia */
+    cursor: pointer; /* Zmena kurzora na pointer */
+}
+
+/* Pridaj tieto štýly pre formulár */
+.registration-form {
+    display: flex;
+    flex-direction: column; /* Umiestni deti pod seba */
+    align-items: center; /* Zarovná na stred */
+    margin: 20px auto; /* Umiestni formulár na stred */
+    padding: 20px; /* Pridaj padding pre lepší vzhľad */
+    background-color: rgba(255, 255, 255, 0.9); /* Pozadie formulára */
+    border-radius: 10px; /* Zaoblené rohy */
+    width: 300px; /* Nastav šírku formulára */
+    color: black; /* Farba textu */
+}
+
+.registration-form label {
+    margin-bottom: 5px; /* Medzera pod label */
+    text-align: center; /* Umiestni label na stred */
+}
+
+.registration-form input {
+    width: 100%; /* Nastav šírku inputov na 100% */
+    padding: 10px; /* Pridaj padding */
+    margin-bottom: 15px; /* Medzera pod inputmi */
+    border: 1px solid #ccc; /* Okraj inputu */
+    border-radius: 5px; /* Zaoblené rohy */
+}
+
+/* Tlačidlo */
+.registration-form button {
+    width: 100%; /* Nastav šírku tlačidla na 100% */
+    padding: 10px; /* Pridaj padding */
+    background-color: black; /* Farba pozadia tlačidla */
+    color: white; /* Farba textu tlačidla */
+    border: none; /* Bez okraja */
+    border-radius: 5px; /* Zaoblené rohy */
+    cursor: pointer; /* Zmeň kurzor na pointer */
+    transition: background-color 0.3s ease; /* Efekt pri hover */
+}
+
+.registration-form button:hover {
+    background-color: darkgray; /* Zmeň farbu pozadia pri hover */
+}
+
+.form-title {
+    text-align: center; /* Zarovná na stred */
+    color: black; /* Farba textu */
+    margin-bottom: 20px; /* Medzera pod nadpisom */
+    font-size: 24px; /* Veľkosť písma */
+}
+
+/* Odkaz v logu, ktorý má ostať v rovnakej farbe */
+header .logo a {
+    text-decoration: none;
+    color: black !important; /* Použijeme konkrétnu farbu a !important */
+}
+
+/* Navštívený stav pre odkaz */
+header .logo a:visited {
+    color: black !important; /* Ošetrenie proti zafarbeniu na fialovo */
+}
+
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Zmenší minimálnu šírku produktov */
+    gap: 20px;
+    margin-top: 40px;
+    margin-left: auto; /* Umiestni produkty na stred */
+    margin-right: auto; /* Umiestni produkty na stred */
+    margin-bottom: 40px;
+}
+
+.product-item {
+    background-color: white; /* Zmenené na biele pozadie */
+    color: black; /* Zmenené na čiernu pre text */
+    border-radius: 15px; /* Zaoblené rohy */
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Čierne tiene pre efekt */
+    transition: transform 0.3s, box-shadow 0.3s; /* Efekt pri prechode myšou */
+    display: flex; /* Flexbox na lepšie zarovnanie obsahu */
+    flex-direction: column; /* Obsah je zoradený vertikálne */
+    justify-content: center; /* Vertikálne centrovanie */
+    align-items: center; /* Horizontálne centrovanie */
+    text-align: center; /* Text bude vycentrovaný */
+    margin: 0 auto; /* Umiestnenie na stred */
+    min-width: 300px; /* Minimálna šírka karty */
+    max-width: 400px; /* Maximálna šírka karty */
+}
+
+.product-item img {
+    max-width: 100px; /* Obrázok bude mať šírku 100% dostupného priestoru */
+    height: auto; /* Zachová pomer strán obrázku */
+    border-radius: 10px; /* Zaoblené rohy obrázku */
+    margin-bottom: 10px; /* Medzera medzi obrázkom a textom */
+}
+
+.product-item h3 {
+    font-size: 1.5rem; /* Nastaví veľkosť nadpisu */
+    margin-bottom: 10px; /* Medzera pod nadpisom */
+}
+
+
+.product-item .price {
+    font-size: 1.2rem; /* Veľkosť ceny */
+    font-weight: bold; /* Zvýraznenie ceny */
+    color: black; /* Zelená farba pre cenu */
+}
+
+.product-item:hover {
+    transform: translateY(-10px); /* Posunutie karty pri hover efekte */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2); /* Zvýraznenie tieňa pri hover */
+}
+
+.add-to-cart-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #218838; /* Tmavšia zelená farba pri hover */
+}
+
+.cart-icon-container {
+    position: relative;
+}
+
+.cart-tooltip {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 250px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    transform: translateX(calc(100% - 250px)); /* Zarovná tooltip v rámci dostupného priestoru */
+}
+
+.cart-icon-container:hover .cart-tooltip {
+    display: block;
+}
+
+.cart-tooltip h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cart-tooltip ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-tooltip ul li {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.cart-tooltip .view-cart-btn {
+    display: block;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 8px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    margin-right: auto;
+}
+
+.nav-icon {
+    margin-right: 15px; /* Medzera medzi ikonami */
+    cursor: pointer;
+}
+
+.cart-icon-container, .user-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Medzera medzi ikonami */
+}
+
+/* Celkový štýl sekcie košíka */
+.cart-section {
+    padding: 80px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+    margin: 80px auto; /* Väčší margin hore a dole pre viac miesta medzi okrajom stránky */
+    width: 80%;
+    color: #000;
+    position: relative;
+    margin-top: 250px; /* Medzera medzi hlavičkou a košíkom */
+    margin-bottom: 250px; /* Medzera medzi košíkom a pätou */
+}
+
+/* Titulok sekcie */
+.cart-section h2 {
+    font-size: 36px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+/* Kontejner pre položky košíka */
+.cart-container {
+    padding: 60px 50px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 25px rgba(0, 0, 0, 0.1);
+    max-height: 800px;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+/* Zoznam položiek v košíku */
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Jednotlivé položky v košíku */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Názov položky */
+.cart-item-name {
+    font-size: 24px;
+    color: #000;
+}
+
+/* Množstvo položky */
+.cart-item-quantity {
+    font-size: 20px;
+    color: #555;
+}
+
+/* Celková cena položky */
+.cart-item-total {
+    font-size: 24px;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Celková cena */
+.cart-total {
+    margin-top: 40px;
+    font-size: 28px;
+    text-align: right;
+    color: #000;
+}
+
+/* Tlačidlo na prechod k pokladni v pravom dolnom rohu */
+.checkout-btn {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: #000;
+    color: #fff;
+    padding: 25px 50px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.checkout-btn:hover {
+    background-color: #444;
+}
+
+/* Správa o prázdnom košíku */
+.cart-container p {
+    font-size: 22px;
+    color: #777;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Štýl pre sekciu formulára */
+.support-form {
+    max-width: 600px;
+    margin: 20px auto; /* Stred stránky */
+    padding: 20px;
+    border: 1px solid #ffffff; /* Biely okraj */
+    border-radius: 10px;
+    background-color: #000000; /* Čierne pozadie */
+    color: #ffffff; /* Biely text */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Jemný svetlý tieň */
+}
+
+/* Štýl pre nadpis formulára */
+.support-form h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Štýl pre všetky labely */
+.support-form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    text-align: center; /* Vycentrovanie labelov */
+}
+
+/* Štýl pre textové polia a textarea */
+.support-form input[type="text"],
+.support-form input[type="email"],
+.support-form textarea {
+    width: 100%; /* Zaberie celú šírku kontajnera */
+    padding: 10px;
+    margin: 0 auto; /* Vycentrovanie polí */
+    border: 1px solid #ffffff; /* Biely okraj */
+    border-radius: 5px;
+    background-color: #ffffff; /* Biele pozadie */
+    color: #000000; /* Čierny text */
+    font-size: 14px;
+    box-sizing: border-box; /* Zabezpečí, že padding a border nebudú zvyšovať šírku elementu */
+    resize: none; /* Zamedzí zmenu veľkosti textarea */
+}
+
+/* Štýl pre tlačidlo odoslania */
+.support-form .cta-button-small {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffffff; /* Biely podklad */
+    color: #000000; /* Čierny text */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* Vycentrovanie textu v tlačidle */
+}
+
+/* Hover efekt pre tlačidlo */
+.support-form .cta-button-small:hover {
+    background-color: #cccccc; /* Svetlejšie pozadie pri hover */
+    color: #000000; /* Čierny text zostáva */
+}
+
+/* Štýl pre sekciu container-support */
+.container-support {
+    max-width: 600px;
+    margin: 20px auto; /* Stred stránky */
+    padding: 20px;
+    text-align: center; /* Zarovnanie textu na stred */
+    border: 1px solid #ffffff; /* Biely okraj */
+    border-radius: 10px;
+    background-color: #000000; /* Čierne pozadie */
+    color: #ffffff; /* Biely text */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Jemný svetlý tieň */
+}
+
+/* Štýl pre nadpis */
+.container-support h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Štýl pre zoznam */
+.container-support ul {
+    list-style: none; /* Odstránenie bodiek zo zoznamu */
+    padding: 0;
+    margin: 0;
+}
+
+/* Štýl pre jednotlivé položky zoznamu */
+.container-support li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Štýl pre status správu */
+.status-message {
+    color: white; /* Zlatožltý text */
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Odkaz v pätičke */
+footer a.support-link {
+    display: inline-block; /* Aby bol odkaz vedľa ostatných prvkov */
+    color: black; /* Biela farba textu */
+    text-decoration: none; /* Odstráni podčiarknutie */
+    font-size: 16px;
+    margin-top: 20px; /* Trochu medzery nad odkazom */
+}
+
+footer a.support-link:hover {
+    text-decoration: underline; /* Podčiarkne odkaz pri hoveri */
+}
+
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.support-form button {
+    margin-top: 20px; /* Pridanie medzery medzi všetkými prvkami */
+}
+
+.html {
+    height: 100%;
+}
+
+.container {
+    flex: 1; /* Tento element zabere všetok voľný priestor medzi hlavičkou a pätou */
+}
+
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.edit-button:hover {
+    background-color: black;
+}
+
+.submit-btn {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: #000;
+    color: #fff;
+    padding: 25px 50px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border: none; /* Odstránenie predvoleného štýlu tlačidla */
+    cursor: pointer; /* Pridané pre zmenu kurzora pri hover */
+}
+
+.submit-btn:hover {
+    background-color: #333; /* Zmena farby pri hover */
+}
+
+.styled-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    background-image: linear-gradient(45deg, transparent 50%, #000 50%), linear-gradient(135deg, #000 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.styled-select:focus {
+    border-color: #333;
+}
