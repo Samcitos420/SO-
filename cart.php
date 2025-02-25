@@ -1,4 +1,7 @@
 <?php
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 include 'get_cart_data.php'; // Načítanie údajov o košíku
 
@@ -10,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Načítanie údajov používateľa
-$sql = "SELECT name, phone, street, city, postal_code, country FROM users WHERE id = ?";
+$sql = "SELECT name, phone, street, city, postal_code, country, email FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -24,6 +27,7 @@ if ($result->num_rows > 0) {
     $city = $user['city'];
     $postal_code = $user['postal_code'];
     $country = $user['country'];
+    $email = $user['email'];
 } else {
     die(json_encode(['error' => 'Používateľské údaje neboli nájdené.']));
 }
@@ -100,13 +104,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         $order_confirmation = "Objednávka bola úspešne vytvorená! ID objednávky: " . $order_id;
+
+        // Generovanie faktúry
+        $invoice_text = "<h1>Faktura</h1>";
+        $invoice_text .= "<p><strong>Objednávka ID:</strong> " . $order_id . "</p>";
+        $invoice_text .= "<p><strong>Meno:</strong> " . $name . "</p>";
+        $invoice_text .= "<p><strong>Adresa:</strong> " . $street . ", " . $city . ", " . $postal_code . ", " . $country . "</p>";
+        $invoice_text .= "<p><strong>Telefón:</strong> " . $phone . "</p>";
+        $invoice_text .= "<hr>";
+
+        $invoice_text .= "<table>";
+        $invoice_text .= "<tr><th>Produkt</th><th>Množstvo</th><th>Cena</th></tr>";
+
+        foreach ($cart_items as $item) {
+            $invoice_text .= "<tr><td>" . $item['product_name'] . "</td><td>" . $item['quantity'] . "</td><td>" . $item['price'] . "€</td></tr>";
+        }
+
+        $invoice_text .= "</table>";
+        $invoice_text .= "<hr>";
+        $invoice_text .= "<p><strong>Celková suma:</strong> " . $total_price . "€</p>";
+
+        if ($payment_method == 'bank_transfer') {
+            $invoice_text .= "<p>Prosím, pošlite čiastku " . $total_price . "€ na účet IBAN: SK0811000000002932511344 a do poznámky uveďte číslo ID objednávky: " . $order_id . ".</p>";
+        } elseif ($payment_method == 'cash_on_delivery') {
+            $invoice_text .= "<p>Očakávajte dodanie balíka kuriérom v najbližších dňoch. Prosím, pripravte si čiastku " . $total_price . "€ na úhradu pri doručení.</p>";
+        }
+
+        // Odosielanie e-mailu pomocou PHPMailer
+        $mail = new PHPMailer(true);
+
+        try {
+            // Konfigurácia SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Nahradiť SMTP serverom
+            $mail->SMTPAuth = true;
+            $mail->Username = 'befitshop.orders@gmail.com';  // Nahradiť vašim SMTP užívateľským menom
+            $mail->Password = 'gsxfzywxsbrzfdlc';  // Nahradiť vašim SMTP heslom
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Príjemca
+            $mail->setFrom('befitshop.orders@gmail.com', 'BeFitShop');
+            $mail->addAddress($email);  // E-mail zákazníka
+
+            // Obsah e-mailu
+            $mail->isHTML(true);  // Nastaviť na true pre HTML formátovanie e-mailu
+            $mail->Subject = 'Vasa faktura';
+            $mail->Body    = $invoice_text;
+
+            $mail->send();
+        } catch (Exception $e) {
+            $order_confirmation .= " E-mail sa nepodarilo odoslať. Chyba: {$mail->ErrorInfo}";
+        }
     } else {
         $order_confirmation = "Chyba pri vytváraní objednávky: " . $stmt->error;
     }
 }
 ?>
-
-
 
 
 <!DOCTYPE html>
